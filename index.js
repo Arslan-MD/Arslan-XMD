@@ -89,25 +89,38 @@ async function loadSession() {
             return null;
         }
 
-        console.log('[⏳] Downloading creds data...');
-        console.log('[🔰] Downloading MEGA.nz session...');
-        
-        // Remove "QADEER-AI~" prefix if present, otherwise use full SESSION_ID
-        const megaFileId = config.SESSION_ID.startsWith('ARSLAN-MD~') 
-            ? config.SESSION_ID.replace("ARSLAN-MD~", "") 
+        console.log('[⏳] Loading creds data...');
+
+        // Remove "QADEER-AI~" prefix if present
+        const sessionString = config.SESSION_ID.startsWith('QADEER-AI~')
+            ? config.SESSION_ID.replace("QADEER-AI~", "")
             : config.SESSION_ID;
 
-        const filer = File.fromURL(`https://mega.nz/file/${megaFileId}`);
+        let data;
+
+        // Case 1: Mega.nz link
+        if (sessionString.startsWith("https://mega.nz")) {
+            console.log('[🔰] Downloading MEGA.nz session...');
+            const filer = File.fromURL(sessionString);
             
-        const data = await new Promise((resolve, reject) => {
-            filer.download((err, data) => {
-                if (err) reject(err);
-                else resolve(data);
+            data = await new Promise((resolve, reject) => {
+                filer.download((err, fileData) => {
+                    if (err) reject(err);
+                    else resolve(fileData);
+                });
             });
-        });
-        
+
+            console.log('[✅] MEGA session downloaded successfully');
+        } 
+        // Case 2: Base64 JSON session
+        else {
+            console.log('[📂] Using Base64 session string...');
+            const decoded = Buffer.from(sessionString, 'base64').toString();
+            data = Buffer.from(decoded, 'utf-8');
+            console.log('[✅] Base64 session decoded successfully');
+        }
+
         fs.writeFileSync(credsPath, data);
-        console.log('[✅] MEGA session downloaded successfully');
         return JSON.parse(data.toString());
     } catch (error) {
         console.error('❌ Error loading session:', error.message);
