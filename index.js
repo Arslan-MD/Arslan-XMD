@@ -92,8 +92,8 @@ async function loadSession() {
         console.log('[⏳] Loading creds data...');
 
         // Remove "QADEER-AI~" prefix if present
-        const sessionString = config.SESSION_ID.startsWith('QADEER-AI~')
-            ? config.SESSION_ID.replace("QADEER-AI~", "")
+        const sessionString = config.SESSION_ID.startsWith('ARSLAN-MD~')
+            ? config.SESSION_ID.replace("ARSLAN-MD~", "")
             : config.SESSION_ID;
 
         let data;
