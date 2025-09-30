@@ -12,7 +12,7 @@ cmd({
     use: '.menu2',
     desc: "Show all bot commands",
     category: "menu",
-    react: "📜",
+    react: "♥️",
     filename: __filename
 }, 
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -361,17 +361,18 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
             },
             { quoted: mek }
         );
-// share local audio 
-
-const audioPath = path.join(__dirname, '../assets/menu.m4a');
-await conn.sendMessage(from, {
-    audio: fs.readFileSync(audioPath),
-    mimetype: 'audio/mp4',
-    ptt: true,
-}, { quoted: mek });
         
+        // 🎶 Add music
+        let musicUrl = "https://files.catbox.moe/zjdphm.mp3"; // updated mp3 link
+        await conn.sendMessage(from, {
+            audio: { url: musicUrl },
+            mimetype: 'audio/mpeg',
+            ptt: false,
+            fileName: "Arslan-XMD-Menu.mp3"
+        }, { quoted: mek });
+
     } catch (e) {
-        console.log(e);
-        reply(`❌ Error: ${e}`);
+        console.error("Error in ping command:", e);
+        reply(`An error occurred: ${e.message}`);
     }
 });
