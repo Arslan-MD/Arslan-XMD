@@ -17,7 +17,7 @@ cmd({
 }, 
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        let dec = `╭━━〔 🚀 *${config.BOT_NAME}* 〕━━┈⊷
+        let dec = `╭━〔 🚀 *${config.BOT_NAME}* ]━┈⊷
 ┃◈╭─────────────────·๏
 ┃◈┃• 👑 Owner : *${config.OWNER_NAME}*
 ┃◈┃• ⚙️ Prefix : *[${config.PREFIX}]*
@@ -27,7 +27,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 ┃◈╰─────────────────┈⊷
 ╰━━━━━━━━━━━━━━━━━━━┈⊷
 
-╭━━〔 📥 *DOWNLOAD MENU* 〕━━┈⊷
+╭━〔 📥 *DOWNLOAD MENU* 〕━┈⊷
 ┃◈╭─────────────────·๏
 ┃◈┃• 🟦 facebook
 ┃◈┃• 📁 mediafire
@@ -96,7 +96,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 ┃◈╰─────────────────┈⊷
 ╰━━━━━━━━━━━━━━━━━━━┈⊷
 
-╭━━〔 🎭 *REACTIONS MENU* 〕━━┈⊷
+╭━〔 🎭 *REACTIONS MENU* 〕━┈⊷
 ┃◈╭─────────────────·๏
 ┃◈┃• 👊 bully @tag
 ┃◈┃• 🤗 cuddle @tag
@@ -372,7 +372,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         }, { quoted: mek });
 
     } catch (e) {
-        console.error("Error in ping command:", e);
+        console.error("Error in Menu command:", e);
         reply(`An error occurred: ${e.message}`);
     }
 });
